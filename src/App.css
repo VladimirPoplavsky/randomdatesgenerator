@@ -1,71 +1,109 @@
 /* src/App.css */
-
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 0;
-}
-
 .App {
   text-align: center;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 50px;
+  background-color: #f5f7fa;
   padding: 20px;
-}
-
-h1 {
-  color: #333;
-  margin-bottom: 20px;
 }
 
 form {
-  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  background: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: inline-block;
-  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 label {
-  display: block;
   margin-bottom: 10px;
-  color: #666;
+  font-weight: 500;
+  color: #333;
 }
 
-input {
-  width: calc(100% - 20px);
+input[type="text"],
+input[type="number"],
+input[type="date"] {
   padding: 10px;
-  margin-bottom: 20px;
+  margin-left: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 200px;
+}
+
+input[type="date"] {
+  width: auto;
 }
 
 button {
-  background-color: #007BFF;
-  color: white;
   padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s;
+  margin-top: 20px;
 }
 
 button:hover {
   background-color: #0056b3;
+  transform: scale(1.05);
 }
 
-ul {
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.date-list {
+  margin-top: 20px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.date-list ul {
   list-style-type: none;
   padding: 0;
 }
 
-li {
-  background: #fff;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+.date-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  color: #555;
 }
 
-li:nth-child(odd) {
-  background: #f9f9f9;
+.date-list li:last-child {
+  border-bottom: none;
+}
+
+.date-list button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.date-list button:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.copy-message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #28a745;
 }
