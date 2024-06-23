@@ -1,10 +1,10 @@
+// src/components/DateList.js
 import React from 'react';
 import CopyButton from './CopyButton';
 
 const DateList = ({ dates }) => {
-    // Function to format dates for copying to Excel
     const formatDatesForCopy = () => {
-        return dates.map(item => `${item.date.toLocaleDateString()} - ${item.dayName}`).join('\r\n');
+        return dates.map(item => `${item.date}`).join('\n');
     };
 
     return (
@@ -13,7 +13,7 @@ const DateList = ({ dates }) => {
             <ul>
                 {dates.map((item, index) => (
                     <li key={index}>
-                        {item.date.toLocaleDateString()}, {item.dayName}
+                        {item.date}
                     </li>
                 ))}
             </ul>
