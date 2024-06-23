@@ -1,23 +1,24 @@
-import React from 'react';
-import {CopyToClipboard} from "react-copy-to-clipboard/src";
+import React, { useState } from 'react';
 
-const CopyButton = ({ textToCopy }) => {
-    const [copied, setCopied] = React.useState(false);
+
+const CopyButton = ({ text }) => {
+    const [copied, setCopied] = useState(false);
+
     const handleCopy = () => {
-        setCopied(true);
-        setTimeout(() => {
-            setCopied(false);
-        }, 1500);
-        navigator.clipboard.writeText(textToCopy)
-            .catch((err) => alert('Failed to copy dates: ', err));
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                setCopied(true);
+                setTimeout(() => {
+                    setCopied(false);
+                }, 1500); // Reset copied state after 1.5 seconds
+            })
+            .catch(err => alert('Failed to copy dates'));
     };
 
     return (
-        <div>
-            <CopyToClipboard text={textToCopy} onCopy={handleCopy}>
-                <button>{copied ? 'Copied' : 'Copy to clipboard'}</button>
-            </CopyToClipboard>
-        </div>
+        <button onClick={handleCopy}>
+            {copied ? 'Copied' : 'Copy to clipboard'}
+        </button>
     );
 };
 

@@ -1,30 +1,47 @@
-// A form component for user input (start date and number of rows).
 import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const DateInput = ({ onGenerate }) => {
-    const [date, setDate] = useState('');
-    const [rows, setRows] = useState(0);
+
+const DateInput = ({ onGenerateDates }) => {
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [rowCount, setRowCount] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const [year, month, day] = date.split('-');
-        const startDate = new Date(year, month - 1, day);
-        onGenerate(startDate, rows);
+        if (startDate && endDate && rowCount) {
+            onGenerateDates(startDate, endDate, parseInt(rowCount));
+        }
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <label>
                 Start Date:
-                <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
+                <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    dateFormat="dd/MM/yyyy"
+                />
+            </label>
+            <label>
+                End Date:
+                <DatePicker
+                    selected={endDate}
+                    onChange={(date) => setEndDate(date)}
+                    dateFormat="dd/MM/yyyy"
                 />
             </label>
             <label>
                 Number of Rows:
-                <input type="number" value={rows} onChange={(e) => setRows(Number(e.target.value))} />
+                <input
+                    type="number"
+                    value={rowCount}
+                    onChange={(e) => setRowCount(e.target.value)}
+                    min="1"
+                    placeholder="Enter number of rows"
+                />
             </label>
             <button type="submit">Generate Dates</button>
         </form>

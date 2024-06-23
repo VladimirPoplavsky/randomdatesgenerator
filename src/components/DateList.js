@@ -1,20 +1,17 @@
-// src/components/DateList.js
 import React from 'react';
 import CopyButton from './CopyButton';
 
 const DateList = ({ dates }) => {
-    const formatDatesForCopy = () => {
-        return dates.map(item => `${item.date}`).join('\n');
-    };
+    // const textToCopy = dates.map(date => `${date.date} ${date.dayName}`).join('\n');
+    const textToCopy = dates.map(date => `${date.date}`).join('\n');
 
     return (
-        <div>
-            <CopyButton textToCopy={formatDatesForCopy()} />
+        <div className="date-list">
+            <CopyButton text={textToCopy} />
             <ul>
-                {dates.map((item, index) => (
-                    <li key={index}>
-                        {item.date}
-                    </li>
+                {dates.map((date, index) => (
+                    // <li key={index}>{date.date} - {date.dayName}</li>
+                    <li key={index}>{date.date}</li>
                 ))}
             </ul>
         </div>
