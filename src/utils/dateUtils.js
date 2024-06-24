@@ -1,16 +1,7 @@
-export const generateRandomDates = (startDate, endDate, rowCount) => {
+export const generateRandomDates = (startDate, endDate) => {
     const dates = [];
-    const dateMap = new Map();
-    // const nameOfDay = {
-    //     0: "ראשון",
-    //     1: "שני",
-    //     2: "שלישי",
-    //     3: "רביעי",
-    //     4: "חמישי",
-    //     5: "שישי",
-    //     6: "שבת"
-    // };
 
+    // Function to format date as dd/mm/yyyy
     const formatDate = (date) => {
         const day = String(date.getDate()).padStart(2, '0');
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -18,24 +9,32 @@ export const generateRandomDates = (startDate, endDate, rowCount) => {
         return `${day}/${month}/${year}`;
     };
 
-    while (dates.length < rowCount) {
-        const randomTime = startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime());
-        const randomDate = new Date(randomTime);
+    // Function to shuffle an array
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    };
 
+    // Iterate through each day between start and end date
+    let currentDate = new Date(startDate);
+    while (currentDate <= endDate) {
         // Skip Fridays (5) and Saturdays (6)
-        if (randomDate.getDay() === 5 || randomDate.getDay() === 6) continue;
-
-        const dateString = randomDate.toDateString();
-        if (!dateMap.has(dateString)) {
-            dateMap.set(dateString, 0);
+        if (currentDate.getDay() !== 5 && currentDate.getDay() !== 6) {
+            // Generate a random number of dates (between 3 and 7) for this day
+            const numberOfDates = Math.floor(Math.random() * 4) + 3;
+            for (let i = 0; i < numberOfDates; i++) {
+                const randomDate = new Date(currentDate);
+                dates.push({ date: formatDate(randomDate) });
+            }
         }
-        if (dateMap.get(dateString) < 6) {
-            dateMap.set(dateString, dateMap.get(dateString) + 1);
-            // const dayName = nameOfDay[randomDate.getDay()];
-            // dates.push({ date: formatDate(randomDate), dayName });
-            dates.push({ date: formatDate(randomDate)});
-        }
+        // Move to the next day
+        currentDate.setDate(currentDate.getDate() + 1);
     }
+
+    // Shuffle the dates array to ensure the list is not sorted
+    shuffleArray(dates);
 
     return dates;
 };

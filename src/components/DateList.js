@@ -2,7 +2,7 @@ import React from 'react';
 import CopyButton from './CopyButton';
 
 const DateList = ({ dates }) => {
-    // const textToCopy = dates.map(date => `${date.date} ${date.dayName}`).join('\n');
+    // Generate text to copy to clipboard
     const textToCopy = dates.map(date => `${date.date}`).join('\n');
 
     return (
@@ -10,7 +10,6 @@ const DateList = ({ dates }) => {
             <CopyButton text={textToCopy} />
             <ul>
                 {dates.map((date, index) => (
-                    // <li key={index}>{date.date} - {date.dayName}</li>
                     <li key={index}>{date.date}</li>
                 ))}
             </ul>
